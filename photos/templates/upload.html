@@ -1,0 +1,12 @@
+<html>
+<head>
+    <title>instaClone</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+        {{ form }}
+      <input type="submit" class="btn btn-default" value="Add a picture">
+   </form>
+</body>
+</html>

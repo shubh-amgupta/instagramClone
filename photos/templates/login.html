@@ -1,22 +1,35 @@
 <html>
 <head>
+     {% load static %}
     <title>instaClone</title>
+    <link href = 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' rel="stylesheet"/>
+    <link href = '{% static "css/main.css" %}' rel="stylesheet"/>
 </head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-      <div>
-          <label for="username">Username: </label>
-          <input id="username" type="text" name="username" value={{ username }}>
-      </div>
+<body class="container-fluid col-lg-12">
+   <div id="main" class="container-fluid col-lg-6">
 
-      <div>
-          <label for="password">Password: </label>
-          <input id="password" type="password" name="password" value={{ password }}>
-      </div>
+      <form id="loginForm" method="post" >
 
-      <input type="submit" value="Log In">
+           {% csrf_token %}
+          <div id="logo">
+             <img id="logoImg" src='{% static "img/logo.png" %}'  /><h2>CLONE</h2>
+          </div>
 
-    </form>
+          <div>
+              <input class="forminput" id="username" type="text" name="username" value="" placeholder="Username" />
+          </div>
+
+          <div>
+              <input class="forminput" id="password" type="password" name="password" value="" placeholder="Password" />
+          </div>
+
+      <button type="submit" class="btn btn-success btn-sm" formaction="/">Sign up </button>
+      <button type="submit" class="btn btn-primary btn-sm" >Log in </button>
+
+
+  </form>
+
+   </div>
+
 </body>
 </html>

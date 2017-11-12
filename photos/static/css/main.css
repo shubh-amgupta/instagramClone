@@ -1,0 +1,280 @@
+body {
+   font-style: 'Halvetica', 'san-serif';
+   background-color: #f4f4f4;
+}
+
+#main {
+   background-color: white;
+   margin-top: 8%;
+   height: 70%;
+   border: 0.5px solid lightgrey;
+}
+
+#signupForm {
+   /*background-color: yellow;*/
+   margin-top: 3%;
+   float: right;
+   width: 45%;
+   /*padding-left: 5%;*/
+   padding-top: 5%;
+}
+
+/*form {
+   margin-top: 20%;
+}*/
+
+.forminput {
+   margin-top: 0;
+   margin-bottom: 3%;
+   width: 90%;
+   margin-left: 5%;
+   height: 6%;
+   padding: 5%;
+   border: #68a1ff solid 0.5px;
+   border-radius: 4px;
+   background-color: #f4f4f4;
+}
+
+button {
+   margin-left: 5%;
+   width: 42%;
+   margin-right: -2px;
+   margin-top: 5%;
+}
+
+#btnfb {
+   width: 90%;
+   margin-top: 6%;
+   margin-bottom: 6%;
+}
+
+#logoImg {
+   height: 10%;
+   width: 60%;
+   margin-left: 0;
+}
+
+h2 {
+   background-color: white;
+   float: right;
+   margin-right: 5%;
+   font-size: 205%;
+   margin-top: 1%;
+}
+
+#logo {
+   margin-bottom: 20px;
+}
+
+.break {
+   border: 1px solid lightgrey;
+   margin-top: 5px;
+   width: 90%;
+   margin-left: 5%;
+   margin-top: 6%;
+
+}
+
+#leftBreak {
+   float: left;
+   margin-right: 4%;
+}
+
+#rightBreak {
+   float: right;
+   margin-right: 0;
+}
+
+
+h3 {
+   font-size: 120%;
+   margin-top: 2%;
+   margin-right: 0;
+   display: inline;
+   width: 10%;
+   padding-right: 0;
+}
+
+
+h6 {
+   width: 65%;
+   text-align: center;
+   margin-left: 18%;
+   font-size: 80%;
+   color: lightgrey;
+}
+
+
+#loginForm {
+   text-align: center;
+   margin-top: 15%;
+   width: 60%;
+   margin-left: 20%;
+   /*padding-left: 5%;*/
+   padding-top: 5%;
+}
+
+#upload {
+   padding: 0;
+   margin: 0;
+   float: right;
+   margin-left: 0;
+   margin-top: 1%;
+   margin-right: -1%;
+   color: grey;
+}
+
+#upload:hover {
+   color: black;
+}
+
+#feed {
+   background-color: white;
+   margin-top: 8%;
+   border: 0.5px solid lightgrey;
+}
+
+#postbox {
+   background-color: white;
+   margin: 0 auto;
+   min-height: 75%;
+   margin-top: 1%;
+   margin-bottom: 1%;
+}
+
+
+#postusername {
+   display: inline-block;
+   margin: 15px 0px;
+   color: grey;
+   font-weight: 400;
+}
+
+#postimage {
+   height: 50%;
+   border: 0.5px solid lightgrey;
+}
+
+#caption h5{
+   margin-top: -5px;
+   font-weight: 200;
+   font-size: 90%;
+}
+
+#postimage img {
+   width: 100%;
+   height: 100%;
+}
+
+
+#commentbox {
+   display: flex;
+}
+
+#likebtn {
+   width: auto;
+   margin: 2% 1% 2% 0;
+}
+
+#cmntbtn {
+   width: auto;
+   margin: 1.5% 1% 2% 0;
+}
+
+#commentbox h5 {
+   margin-right: 4%;
+   margin-left: -2%;
+   margin-top: 2%;
+   padding: 3% 0;
+   font-weight: 300;
+   color: grey;
+   font-size: 90%;
+}
+
+
+#commentbox a {
+   text-decoration: none;
+   color: grey;
+}
+
+#commentbox a:hover {
+   text-decoration: none;
+   color: black;
+}
+
+
+#usercomment input {
+   width: 100%;
+   border: 0.5px solid lightgrey;
+   border-radius: 2%;
+   height: 4%;
+}
+
+#comments {
+   border: 0.5px solid lightgrey;
+   width: 90%;
+   margin-left: auto;
+   margin-top: 2%;
+   margin-bottom: 2%;
+}
+
+#comments h5 {
+   display: inline-block;
+   padding: 1%;
+   margin-bottom: 0;
+}
+
+#comments h6 {
+   padding-left: 1%;
+   padding-bottom: 1%;
+   text-align: left;
+   margin-left: 0;
+   margin-bottom: 0;
+}
+
+#user {
+   font-weight: bold;
+}
+
+#comment {
+   font-weight: 200;
+}
+
+
+#uploadimage {
+   height: 60%;
+   border: 0.5px solid grey;
+   width: 85%;
+   margin: 10% 0 2% 0;
+   border-radius: 1%;
+}
+
+
+.smallbtn {
+   /*width: auto;*/
+   margin: 1.5% 1% 2% 0;
+}
+
+.center {
+   text-align: center;
+   margin: 0 auto;
+}
+
+#captiontext {
+   height: 5%;
+   margin-top: 3%;
+   margin-bottom: -7%;
+   padding: 3%;
+   width: 86%;
+   margin-left: 0;
+   background-color: white;
+}
+
+
+#mainimage {
+   color: yellow;
+   width: 50%;
+   height: 40%;
+   margin-top: 22%;
+   margin-left: 3%;
+}

@@ -1,12 +1,49 @@
 <html>
 <head>
+    {% load static %}
     <title>instaClone</title>
+    <link href = 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' rel="stylesheet"/>
+    <link href = '{% static "css/main.css" %}' rel="stylesheet"/>
 </head>
-<body>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-        {{ form }}
-      <input type="submit" class="btn btn-default" value="Add a picture">
-   </form>
+<body class="container-fluid col-lg-12">
+   <div id="main" class="container-fluid col-lg-6">
+
+      <div class="center col-lg-11">
+         <form method="POST" enctype="multipart/form-data">
+             {% csrf_token %}
+            <input type="file" id="file" style="display: none" onchange="previewFile()">
+            <input type="text" class="forminput" id="captiontext" placeholder="Caption" name="caption" value= "{{ form.caption }}" />
+            <img id="uploadimage">
+            <br />
+
+            <label for="file" class="btn btn-outline-primary smallbtn col-lg-5">Select image</label>
+            <label for="uploadbtn" class="btn btn-outline-success smallbtn col-lg-5">Add picture</label>
+            <input type="submit" id="uploadbtn" class="btn btn-outline-success smallbtn" value="Add picture" style="display: none"/>
+            <button class="btn btn-outline-secondary smallbtn" type="submit" formaction="feed.html">Back to feed</button>
+         </form>
+      </div>
+
+   </div>
+
+   <script>
+
+   function previewFile() {
+      var preview = document.querySelector('img');
+      var file    = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
+
+      reader.onloadend = function () {
+      preview.src = reader.result;
+      }
+
+      if (file) {
+      reader.readAsDataURL(file);
+      } else {
+      preview.src = "";
+      }
+   }
+
+   </script>
+
 </body>
 </html>

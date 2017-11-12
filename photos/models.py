@@ -38,8 +38,12 @@ class PostModel(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
-    # def __init__(self, image=None, image_url=None, caption=None, *args, **kwargs):
-    #     super(PostModel, self).__init__(*args, **kwargs)
-    #     self.image = image or self.image
-    #     self.image_url = image_url or self.image_url
-    #     self.caption = caption or self.caption
+    def __str__(self):
+        return self.user.name + '(' + self.image_url + ')'
+
+
+class LikeModel(models.Model):
+    user = models.ForeignKey(User)
+    post = models.ForeignKey(PostModel)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)

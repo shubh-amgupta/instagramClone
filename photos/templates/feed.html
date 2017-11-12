@@ -1,0 +1,78 @@
+<html>
+<meta charset="UTF-8">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% load static %}
+    <title>instaClone</title>
+    <link href = 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!--<link rel="stylesheet" href='{& static "css/font-awesome.css" %}' />-->
+    <link href = '{% static "css/main.css" %}' rel="stylesheet"/>
+</head>
+<body class="container-fluid col-lg-12">
+
+    {% csrf_token %}
+
+
+   <div id="feed" class="container-fluid col-lg-6">
+
+      <a id="upload" href="post/"><i class="fa fa-plus-square-o fa-2x"></i></a>
+
+
+       {% for post in posts %}
+      <div id="postbox" class="col-lg-11">
+
+         <div id="postusername">
+            <h4>{{ post.user.username }} </h4>
+         </div>
+
+         <div id="caption">
+            <h5>{{ post.caption }}</h5>
+         </div>
+
+         <div id="postimage">
+            <!-- <img src="3.png" /> -->
+            <img src="{{ post.image_url }}">
+         </div>
+
+          <form method="post" action="/like/">
+              {% csrf_token %}
+             <div id="commentbox">
+                 <input type="hidden" name="post" value="{{ post.id }}">
+                <a id="likebtn" href="javascript:void(0)"><i class="fa fa-heart-o fa-2x"></i></a>
+                <h5>10</h5>
+                <a id="cmntbtn"><i class="fa fa-comment-o fa-2x"></i></a>
+                <h5>20</h5>
+             </div>
+          </form>
+
+         <div id="usercomment">
+            <input type="textbox" placeholder="Type your comment..."/>
+         </div>
+
+         <div id="comments">
+            <h5 id="user">user</h5>
+            <h5 id="comment">comment is here.</h5>
+            <h6>date</h6>
+         </div>
+
+      </div>
+
+         {% endfor %}
+
+
+   </div>
+
+    <script>
+
+        $(document).ready(function(){
+           $(document).on("click","#likebtn",function(){
+             var form = $(this).closest("form");
+             form.submit();
+           });
+        });
+
+    </script>
+
+</body>
+</html>

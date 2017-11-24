@@ -11,12 +11,21 @@
 </head>
 <body class="container-fluid col-lg-12">
 
-    {% csrf_token %}
+    <!--{% csrf_token %}-->
 
 
    <div id="feed" class="container-fluid col-lg-6">
 
-      <a id="upload" href="post/"><i class="fa fa-plus-square-o fa-2x"></i></a>
+      <form class="navigation" method="POST" action="/search/">
+
+          {% csrf_token %}
+
+         <input type="text" id="searchuser" placeholder="Search" value="{{ search }}" name="search" style="padding:2px;"/>
+         <a id="searchbtn" href="javascript:void(0)"><i class="fa fa-search" style="margin: 1% 1% 0 -2%; color: grey;font-size: 140%;"></i></a>
+
+         <a class="upload" href="../post/"><i class="fa fa-plus-square-o"></i></a>
+         <a class="upload" href="../logout/"><i class="fa fa-user-o" style="font-size:83%; margin-top:10%;"></i></a>
+      </form>
 
 
        {% for post in posts %}
@@ -26,12 +35,17 @@
             <h4>{{ post.user.username }} </h4>
          </div>
 
+          {% if post.ifdirty %}
+
+                <span class="badge badge-danger floatright">Dirty Spot</span>
+
+          {% endif %}
+
          <div id="caption">
             <h5>{{ post.caption }}</h5>
          </div>
 
          <div id="postimage">
-            <!-- <img src="3.png" /> -->
             <img src="{{ post.image_url }}">
          </div>
 
@@ -39,22 +53,65 @@
               {% csrf_token %}
              <div id="commentbox">
                  <input type="hidden" name="post" value="{{ post.id }}">
-                <a id="likebtn" href="javascript:void(0)"><i class="fa fa-heart-o fa-2x"></i></a>
-                <h5>10</h5>
-                <a id="cmntbtn"><i class="fa fa-comment-o fa-2x"></i></a>
-                <h5>20</h5>
+                 <!--<a id="likebtn" href="javascript:void(0)"><i class="fa fa-heart-o fa-2x"></i></a>-->
+                 {% if post.has_liked %}
+
+                    <a id="likebtn" href="javascript:void(0)"><i class="fa fa-heart fa-2x" style="color:black;"></i></a>
+
+                {% else %}
+
+                    <a id="likebtn" href="javascript:void(0)"><i class="fa fa-heart-o fa-2x" style="color:grey;"></i></a>
+
+                {% endif %}
+                <h5>{{ post.like_count }}</h5>
+
+                 {% if post.comment.count > 0 %}
+                    <a id="cmntbtn"><i class="fa fa-comment fa-2x" style="color:grey;"></i></a>
+                    <h5>{{ post.comment_count }}</h5>
+
+                 {% else %}
+                    <a id="cmntbtn"><i class="fa fa-comment-o fa-2x"></i></a>
+                    <h5>{{ post.comment_count }}</h5>
+
+                 {% endif %}
+
              </div>
           </form>
 
-         <div id="usercomment">
-            <input type="textbox" placeholder="Type your comment..."/>
-         </div>
 
-         <div id="comments">
-            <h5 id="user">user</h5>
-            <h5 id="comment">comment is here.</h5>
-            <h6>date</h6>
-         </div>
+
+          <form method="POST" action="/comment/">
+              {% csrf_token %}
+              <input type="hidden" name="post" value="{{ post.id }}" >
+              <div id="usercomment">
+                     <input type="text" placeholder="Type your comment..." value="{{ comment_text }}" name="comment_text"/><a id="postbtn" href="javascript:void(0)"><i class="fa fa-arrow-right"></i></a>
+              </div>
+          </form>
+
+
+
+          <div>
+
+              {% for comment in post.comments %}
+
+                <form method="POST" action="/upvote/">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment" value="{{ comment.id }}">
+                    <a id="upvotebtn" href="javascript:void(0)"><i class="fa fa-chevron-up" style="float:left;"></i></a>
+                    <h6>{{ post.comment.vote_count }}</h6>
+                </form>
+
+                <div id="comments">
+                    <h5 id="user">{{ comment.user.username }}</h5>
+                    <h5 id="comment">{{ comment.comment_text }}</h5>
+                    <h6>{{ comment.created_on }}</h6>
+                </div>
+
+              {% endfor %}
+
+          </div>
+
+
 
       </div>
 
@@ -63,10 +120,27 @@
 
    </div>
 
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
     <script>
 
         $(document).ready(function(){
            $(document).on("click","#likebtn",function(){
+             var form = $(this).closest("form");
+             form.submit();
+           });
+
+           $(document).on("click","#postbtn",function(){
+             var form = $(this).closest("form");
+             form.submit();
+           });
+
+           $(document).on("click","#searchbtn",function(){
+             var form = $(this).closest("form");
+             form.submit();
+           });
+
+           $(document).on("click","#upvotebtn",function(){
              var form = $(this).closest("form");
              form.submit();
            });

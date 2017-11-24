@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from photos.views import signup,login, post, feed, like
+from photos.views import signup,login, post, feed, like, comment, logout, search_user, upvote
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,6 +23,10 @@ urlpatterns = [
     url(r'^post/', post),
     url(r'^feed/', feed),
     url(r'^post/feed', feed),
-    url('like/', like),
+    url(r'^like/', like),
+    url(r'^comment/', comment),
+    url(r'^logout/', logout),
+    url(r'^search/', search_user),
+    url(r'^upvote/', upvote),
     url(r'^$', signup),
 ]

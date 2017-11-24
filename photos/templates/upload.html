@@ -11,15 +11,15 @@
       <div class="center col-lg-11">
          <form method="POST" enctype="multipart/form-data">
              {% csrf_token %}
-            <input type="file" id="file" style="display: none" onchange="previewFile()">
-            <input type="text" class="forminput" id="captiontext" placeholder="Caption" name="caption" value= "{{ form.caption }}" />
+            <input type="file" id="file" style="display: none" onchange="previewFile()" name="image" value="{{ image }}">
+            <input type="textbox" class="forminput" id="captiontext" placeholder="Caption" name="caption" value= "{{ caption }}" />
             <img id="uploadimage">
             <br />
 
             <label for="file" class="btn btn-outline-primary smallbtn col-lg-5">Select image</label>
             <label for="uploadbtn" class="btn btn-outline-success smallbtn col-lg-5">Add picture</label>
             <input type="submit" id="uploadbtn" class="btn btn-outline-success smallbtn" value="Add picture" style="display: none"/>
-            <button class="btn btn-outline-secondary smallbtn" type="submit" formaction="feed.html">Back to feed</button>
+            <button class="btn btn-outline-secondary smallbtn" type="submit" formaction="../feed/">Back to feed</button>
          </form>
       </div>
 

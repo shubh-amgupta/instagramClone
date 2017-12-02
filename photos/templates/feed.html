@@ -11,21 +11,28 @@
 </head>
 <body class="container-fluid col-lg-12">
 
-    <!--{% csrf_token %}-->
+    <nav class="navbar navbar-expand-lg navbar-light col-lg-8" style="margin: 0 auto; background-color:white; border-radius:5px">
+      <a class="navbar-brand" href="../feed/">{{ user.username }}</a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="navigation" method="POST" action="/search/">
+
+              {% csrf_token %}
+
+             <input type="text" id="searchuser" placeholder="Search" value="{{ search }}" name="search" style="padding:2px;"/>
+             <a id="searchbtn" href="javascript:void(0)"><i class="fa fa-search" style="margin: 1% 1% 0 -2%; color: grey;font-size: 140%;"></i></a>
+
+              <a class="upload" href="../logout/"><i class="fa fa-user-o" style="font-size:83%; margin-top:10%;"></i>
+             </a><a class="upload" href="../post/"><i class="fa fa-plus-square-o"></i></a>
+          </form>
+
+      </div>
+    </nav>
 
 
-   <div id="feed" class="container-fluid col-lg-6">
+   <div id="feed" class="container-fluid col-lg-6" style="margin-top:5%;">
 
-      <form class="navigation" method="POST" action="/search/">
 
-          {% csrf_token %}
-
-         <input type="text" id="searchuser" placeholder="Search" value="{{ search }}" name="search" style="padding:2px;"/>
-         <a id="searchbtn" href="javascript:void(0)"><i class="fa fa-search" style="margin: 1% 1% 0 -2%; color: grey;font-size: 140%;"></i></a>
-
-         <a class="upload" href="../post/"><i class="fa fa-plus-square-o"></i></a>
-         <a class="upload" href="../logout/"><i class="fa fa-user-o" style="font-size:83%; margin-top:10%;"></i></a>
-      </form>
 
 
        {% for post in posts %}

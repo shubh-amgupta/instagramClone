@@ -41,7 +41,7 @@ class PostModel(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.name + '(' + self.image_url + ')'
+        return self.user.username
 
     def like_count(self):
         return len(LikeModel.objects.filter(post=self))

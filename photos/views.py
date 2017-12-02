@@ -9,8 +9,11 @@ from .models import User, SessionToken, PostModel, LikeModel, CommentModel
 from imgurpython import ImgurClient
 from instaClone.settings import BASE_DIR
 from clarifai.rest import ClarifaiApp
-from django.core.mail import send_mail
 import sendgrid
+import os
+from sendgrid.helpers.mail import *
+from sendgridapi import SENDGRID_API_KEY
+
 
 CLIENT_ID = '27e5c7f70526d0e'
 CLIENT_SECRET = '46083ca5c1ed6e35dcad9176a608e9aee9df915a'
@@ -25,8 +28,7 @@ def signup(request):
     if request.method == "POST":
         form = signupForm(request.POST)  # if post request is received pass the data into signupForm class
         if form.is_valid():  # if form data is valid django validates data.
-            username = form.cleaned_data[
-                'username']  # extractiong cleaned data. Automatically done in new python and django versions
+            username = form.cleaned_data['username']  # extractiong cleaned data. Automatically done in new python and django versions
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
@@ -143,7 +145,7 @@ def feed(request):
             existing_like = LikeModel.objects.filter(post_id=post.id, user=user).first()
             if existing_like:
                 post.has_liked = True
-        return render(request, 'feed.html', {'posts': posts})
+        return render(request, 'feed.html', {'posts': posts, 'user': user})
     else:
         return redirect('/login/')
 
@@ -155,20 +157,15 @@ def like(request):
         form = LikeForm(request.POST)
         if form.is_valid():
             post_id = form.cleaned_data.get('post').id
+            username = form.cleaned_data.get('post')
+            useremail = User.objects.filter(username=username).first().email
 
             existing_like = LikeModel.objects.filter(post_id=post_id, user=user).first()
 
             if not existing_like:
                 LikeModel.objects.create(post_id=post_id, user=user)
                 #email
-                send_mail(
-                    'Like on Post',
-                    'Some user have liked your recent post',
-                    'instaacadview@gmail.com',
-                    [user.email],
-                    # fail_silently=False,
-
-                )
+                sendmail(str(useremail), "InstaClone: Like on Post", "Some user have liked on your post")
 
             else:
                 existing_like.delete()
@@ -186,16 +183,13 @@ def comment(request):
 
         if form.is_valid():
             post_id = form.cleaned_data.get('post').id
+            username = form.cleaned_data.get('post')
+            useremail = User.objects.filter(username=username).first().email
+
             comment_text = form.cleaned_data.get('comment_text')
             comment = CommentModel.objects.create(user=user, post_id=post_id, comment_text=comment_text)
             comment.save()
-            # send_mail(
-            #     'Comment on Post',
-            #     'Some user have commented your recent post',
-            #     'instaacadview@gmail.com',
-            #     [str(user.email)],
-            #     # fail_silently=False,
-            # )
+            sendmail(str(useremail), "InstaClone: Comment on Post", "Some user have commented on your post")
 
             return redirect('/feed/')
         else:
@@ -224,13 +218,17 @@ def search_user(request):
     user = checkValidation(request)
     if user:
         searchuser = request.POST['search']
-        print searchuser + "-----" + str(user)
-        posts = PostModel.objects.all().filter(user=searchuser).order_by('-created_on')
+        if searchuser == '':
+            posts = PostModel.objects.all().order_by('-created_on')
+
+        else:
+            posts = PostModel.objects.all().filter(user=searchuser).order_by('-created_on')
+
         for post in posts:
             existing_like = LikeModel.objects.filter(post_id=post.id, user=user).first()
             if existing_like:
                 post.has_liked = True
-        return render(request, 'feed.html', {'posts': posts})
+        return render(request, 'feed.html', {'posts': posts, 'user': user})
     else:
         return redirect('/login/')
 
@@ -254,3 +252,20 @@ def upvote(request):
             return redirect('/feed/')
     else:
         return redirect('/login/')
+
+
+def sendmail(email, subj, cont):
+    try:
+        sg = sendgrid.SendGridAPIClient(apikey="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")
+        from_email = Email("instaacadview@gmail.com")
+        to_email = Email(email)
+        subject = subj
+        content = Content("text/plain", cont)
+        mail = Mail(from_email, subject, to_email, content)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+
+    except Exception, e:
+        print str(e) + "------exception------"

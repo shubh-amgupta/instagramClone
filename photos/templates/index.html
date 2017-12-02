@@ -17,23 +17,23 @@
            {% csrf_token %}
 
            <div>
-              <input class="forminput" id="email" type="text" name="email" value="{{ email }}" placeholder="Email"/>
+              <input class="forminput" id="email" type="text" name="email" value="" placeholder="Email"/>
            </div>
 
            <div>
-              <input class="forminput" id="name" type="text" name="name" value="{{ name }}" placeholder="Full name"/>
+              <input class="forminput" id="name" type="text" name="name" value="" placeholder="Full name"/>
            </div>
 
           <div>
-              <input class="forminput" id="username" type="text" name="username" value="{{ username }}" placeholder="Username" />
+              <input class="forminput" id="username" type="text" name="username" value="" placeholder="Username" />
           </div>
 
           <div>
-              <input class="forminput" id="password" type="password" name="password" value="{{ password }}" placeholder="Password" />
+              <input class="forminput" id="password" type="password" name="password" value="" placeholder="Password" />
           </div>
 
       <button type="submit" class="btn btn-success btn-sm">Sign up </button>
-      <button type="submit" class="btn btn-primary btn-sm" formaction="/login/">Log in </button>
+      <button type="submit" class="btn btn-primary btn-sm" formaction="../login/">Log in </button>
 
       <div class="break" id="leftBreak">
       </div>

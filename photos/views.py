@@ -12,7 +12,9 @@ from clarifai.rest import ClarifaiApp
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
-from sendgridapi import SENDGRID_API_KEY
+
+
+SENDGRID_API_KEY = ""
 
 
 CLIENT_ID = '27e5c7f70526d0e'

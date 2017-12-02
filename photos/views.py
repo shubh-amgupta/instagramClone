@@ -256,7 +256,7 @@ def upvote(request):
 
 def sendmail(email, subj, cont):
     try:
-        sg = sendgrid.SendGridAPIClient(apikey="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")
+        sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
         from_email = Email("instaacadview@gmail.com")
         to_email = Email(email)
         subject = subj
